@@ -9,7 +9,7 @@ import com.egg.news.Repositorios.repositorioNoticia;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ public class serviciosNoticia  {
         noticia.setCuerpo(Cuerpo);
         rN.save(noticia);
     }
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Noticia> buscarNoticia(String palabraClave){
         List<Noticia> noticias = new ArrayList();
         noticias = rN.buscarNoticia(palabraClave);
