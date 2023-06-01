@@ -3,7 +3,7 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Noticias</title>
         <meta charset="UTF-8">
@@ -60,11 +60,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="card">
+                <div th:each="noticia : ${noticias}" class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 th:text="${noticia.titulo}"class="card-title"></h5>
+                        <p th:text="${noticia.cuerpo}" class="card-text"></p>
+                        <a href="#" class="btn btn-primary">Más Información</a>
                     </div>
                 </div>
             </div>

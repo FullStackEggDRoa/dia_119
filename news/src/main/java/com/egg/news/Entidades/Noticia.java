@@ -34,6 +34,7 @@ public class Noticia implements Serializable{
     //Constructores
 
     public Noticia() {
+        this.alta = true;
     }
 
     public Noticia(String idNoticia, String titulo, String cuerpo) {

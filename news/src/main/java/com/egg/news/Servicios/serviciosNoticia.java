@@ -38,6 +38,13 @@ public class serviciosNoticia  {
         noticias = rN.buscarNoticia(palabraClave);
         return noticias;
     }
+    @Transactional(readOnly = true)
+    public List<Noticia> todasNoticias(){
+        List<Noticia> noticias = new ArrayList();
+        noticias = rN.findAll();
+        return noticias;
+    }
+    
     @Transactional
     public void darDeBajaNoticia(String idNoticia){
         
