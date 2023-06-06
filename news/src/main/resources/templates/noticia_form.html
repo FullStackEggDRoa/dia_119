@@ -14,16 +14,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <body>
         <div class="container-sm">
             <h2>Formulario Noticia</h2>
-            <FORM action="/noticia/crear" method="POST">
+            <FORM th:action="*{modo == 'modificar'}?@{/noticia/modificar/__${noticia.id}__}:@{/noticia/crear}" method="POST">
+                <input hidden th:value= "${id}" name="id">
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label" >Titulo: </label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Titulo Noticia" name="titulo">
+                    <input th:value="${noticia.titulo}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Titulo Noticia" name="titulo">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label" >Contenido:</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="cuerpo"></textarea>
+                    <textarea th:text="${noticia.cuerpo}" class="form-control" id="exampleFormControlTextarea1" rows="3" name="cuerpo" placeholder="Detalle Noticia"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary mt-3 botones">Crear Noticia</button>
+                
             </FORM>
         </div>
         

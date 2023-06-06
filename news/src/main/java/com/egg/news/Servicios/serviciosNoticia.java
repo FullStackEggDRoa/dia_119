@@ -45,6 +45,26 @@ public class serviciosNoticia  {
         return noticias;
     }
     
+    @Transactional(readOnly = true)
+    public Noticia obtenerNoticia(String idNoticia){
+        Noticia noticia= new Noticia();
+        noticia = rN.getOne(idNoticia);
+        return noticia;
+    }
+    
+    @Transactional
+    public void modificarNoticia(String Id, String Titulo, String Cuerpo){
+        Optional<Noticia> respuestaNoticia = rN.findById(Id);
+        Noticia noticia = new Noticia();
+        if(respuestaNoticia.isPresent()){
+            noticia = respuestaNoticia.get();
+            noticia.setTitulo(Titulo);
+            noticia.setCuerpo(Cuerpo);
+            rN.save(noticia);
+        }
+        
+    }
+    
     @Transactional
     public void darDeBajaNoticia(String idNoticia){
         

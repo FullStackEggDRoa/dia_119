@@ -29,7 +29,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <th th:text=${noticia.id} scope="row"></th>
                         <td th:text=${noticia.titulo}></td>
                         <td>
-                            <button type="button" class="btn btn-dark">Modificar</button>
+<!--                            <button type="button" class="btn btn-dark">Modificar</button>-->
+                            <a th:href= "@{/noticia/modificacion/__${noticia.id}__}"><i class="fas fa-feather-alt">  </i> Modificar ✐  </a>
                         </td>
                     </tr>
                     
