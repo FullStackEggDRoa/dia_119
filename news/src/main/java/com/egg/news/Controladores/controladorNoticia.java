@@ -30,14 +30,15 @@ public class controladorNoticia {
     @GetMapping("/creacion")
     public String creacion(ModelMap modelo){
         modelo.addAttribute("noticia",new Noticia("","",""));
+        modelo.put("modulo","noticiaform");
         modelo.put("modo","crear");
-        return "noticia_form.html";
+        return "index.html";
     }
     @GetMapping("/modificacion")
     public String modificacionLista(ModelMap modelo){
         List<Noticia> noticias= sN.todasNoticias();
         modelo.addAttribute("noticias", noticias);
-        modelo.put("modulo", "noticia_form");
+        modelo.put("modulo", "modificacion");
         modelo.put("modo", "crear");
         return "index.html";
 //        return "index.html";
@@ -46,8 +47,9 @@ public class controladorNoticia {
     public String modificacionForm(@PathVariable String id, ModelMap modelo){
         modelo.addAttribute("noticia",sN.obtenerNoticia(id));
         // Enviar path para action
+        modelo.put("modulo","noticiaform");
         modelo.put("modo","modificar");
-        return "noticia_form.html";
+        return "index.html";
     }
     @PostMapping("/crear")
     public String crear(@RequestParam String titulo,@RequestParam String cuerpo)
@@ -56,15 +58,15 @@ public class controladorNoticia {
         return "index.html";
     }
     @PostMapping("/modificar/{id}")
-    public String modificar(@PathVariable String id, String titulo, String cuerpo, ModelMap modelo)
+    public String modificar(@PathVariable String id, String titulo, String cuerpo, Boolean alta, ModelMap modelo)
     {
         List<Noticia> noticias= sN.todasNoticias();
         
         modelo.put("estado", true);
         modelo.addAttribute("noticias", noticias);
         
-        sN.modificarNoticia(id, titulo, cuerpo);
+        sN.modificarNoticia(id, titulo, cuerpo,alta);
         
-        return "noticia_lista.html";
+        return "redirect:/";
     }
 }

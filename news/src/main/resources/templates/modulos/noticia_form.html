@@ -1,0 +1,25 @@
+<section id="contenido" class="row container" >
+    <div class="container-sm">
+        <h2>Formulario Noticia</h2>
+        <FORM th:action="*{modo == 'modificar'}?@{/noticia/modificar/__${noticia.id}__}:@{/noticia/crear}" method="POST">
+            <input hidden th:value= "${id}" name="id">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label" >Titulo: </label>
+                <input th:value="${noticia.titulo}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Titulo Noticia" name="titulo">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label" >Contenido:</label>
+                <textarea th:text="${noticia.cuerpo}" class="form-control" id="exampleFormControlTextarea1" rows="3" name="cuerpo" placeholder="Detalle Noticia"></textarea>
+            </div>
+            <div th:if="${modo} == 'modificar'" class="form-check">
+                <input class="form-check-input" type="checkbox" value="true" name="alta" id="flexCheckDefault" th:checked="${noticia.alta}" >
+                <label class="form-check-label" for="flexCheckDefault">
+                    Noticia Disponible
+                </label>
+            </div>
+
+            <button th:if="${modo} == 'crear'" type="submit" class="btn btn-primary mt-3 botones">Crear Noticia</button>
+            <button th:if="${modo} == 'modificar'" type="submit" class="btn btn-primary mt-3 botones">Modificar Noticia</button>
+        </FORM>
+    </div>
+</section>

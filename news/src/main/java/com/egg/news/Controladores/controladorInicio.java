@@ -28,6 +28,7 @@ public class controladorInicio {
     public String index(ModelMap modelo){
         List<Noticia> noticias = sN.todasNoticias();
         modelo.addAttribute("noticias", noticias);
+        modelo.put("modulo","inicio");
         return "index.html";
     }
 }

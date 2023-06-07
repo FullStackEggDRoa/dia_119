@@ -53,13 +53,14 @@ public class serviciosNoticia  {
     }
     
     @Transactional
-    public void modificarNoticia(String Id, String Titulo, String Cuerpo){
+    public void modificarNoticia(String Id, String Titulo, String Cuerpo, Boolean Alta){
         Optional<Noticia> respuestaNoticia = rN.findById(Id);
         Noticia noticia = new Noticia();
         if(respuestaNoticia.isPresent()){
             noticia = respuestaNoticia.get();
             noticia.setTitulo(Titulo);
             noticia.setCuerpo(Cuerpo);
+            noticia.setAlta(Alta);
             rN.save(noticia);
         }
         

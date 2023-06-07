@@ -21,7 +21,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                            <a class="nav-link active" aria-current="page" th:href="@{/}">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
@@ -48,8 +48,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </div>
             </div>
         </nav>
-        
-        <section th:replace="${modulo =='noticia_form'}?~{/modulos/modificacion :: section}:~{/modulos/inicial :: section}"></section>
+       
+<!--        <section th:replace="${modulo =='modificacion'}?~{/modulos/modificacion :: section}:~{/modulos/inicial :: section}"></section>-->
+            <section th:replace="${modulo =='modificacion'} ? ~{/modulos/modificacion :: section} : (${modulo == 'noticiaform'}?~{/modulos/noticia_form :: section}:~{/modulos/inicial :: section})"></section>
+<!--        <section th:if="${modulo == 'inicio'}" th:replace="/modulos/inicial :: section"></section>
+        <section th:unless="${modulo != 'inicio'}" th:replace="${modulo == 'modificacion'}?~{/modulos/modificacion :: section}:~{/modulos/noticia_form :: section}"></section>-->
         
         <footer class="text-muted py-5">
             <div class="containerFooter">
