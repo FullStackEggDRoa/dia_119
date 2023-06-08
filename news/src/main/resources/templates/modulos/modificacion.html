@@ -1,13 +1,14 @@
 
-<section id="contenido" class="row container" >
-    <div class="container-sm">
+<section id="contenido" class="row " >
+    <div class="container-md">
         <h4>Noticias Registradas</h4>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Titulo</th>
-                    <th scope="col">Acción</th>
+                    <th scope="col">Estados</th>
+                    <th scope="col">Acciones</th>
 
                 </tr>
             </thead>
@@ -16,8 +17,14 @@
                     <th th:text=${noticia.id} scope="row"></th>
                     <td th:text=${noticia.titulo}></td>
                     <td>
-                        <!--                            <button type="button" class="btn btn-dark">Modificar</button>-->
-                        <a th:href= "@{/noticia/modificacion/__${noticia.id}__}"><i class="fas fa-feather-alt">  </i> Modificar ✐  </a>
+                        <p th:if="${noticia.alta}" alt="Visible"><strong>👁</strong></p>
+                        <p th:if="not ${noticia.alta}"><strong><strike>𓁼</strike></strong></p>
+                    </td>
+                    <td>
+                        <!--                      <span style="display: inline-block; font-size: 24px; color: #000000; background: #cccccc; border-radius: 6px; padding: 10px 20px;">👁️</span>      <button type="button" class="btn btn-dark">Modificar</button>-->
+                        <a th:href= "@{/noticia/modificacion/__${noticia.id}__}"><i class="fas fa-feather-alt" alt="Mofidicar">  </i> ✏️ </a>
+                        <a th:href= "@{/noticia/modificacion/__${noticia.id}__}"><i class="fas fa-feather-alt" alt="Mofidicar">  </i> 🗑 </a>
+                        
                     </td>
                 </tr>
 

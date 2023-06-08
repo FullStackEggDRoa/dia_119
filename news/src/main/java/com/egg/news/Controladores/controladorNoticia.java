@@ -5,8 +5,11 @@
 package com.egg.news.Controladores;
 
 import com.egg.news.Entidades.Noticia;
+import com.egg.news.Excepciones.NoticiasExcepsion;
 import com.egg.news.Servicios.serviciosNoticia;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -52,9 +55,20 @@ public class controladorNoticia {
         return "index.html";
     }
     @PostMapping("/crear")
-    public String crear(@RequestParam String titulo,@RequestParam String cuerpo)
+    public String crear(@RequestParam String titulo,@RequestParam String cuerpo, ModelMap modelo)
     {
-        sN.crearNoticia(titulo, cuerpo);
+        try {
+            sN.crearNoticia(titulo, cuerpo);
+            modelo.put("hecho", "Noticia Registrada");
+            
+        } catch (NoticiasExcepsion ex) {
+            
+            modelo.put("notificacion", "Noticia Registrada");
+            modelo.put("modulo","noticiaform");
+            modelo.put("modo","crear");
+//            return "redirect:/noticia/creacion";
+            return "index.html";
+        }
         return "index.html";
     }
     @PostMapping("/modificar/{id}")
@@ -62,11 +76,14 @@ public class controladorNoticia {
     {
         List<Noticia> noticias= sN.todasNoticias();
         
+        modelo.put("hecho", "Noticia Modificada");
+        modelo.put("modulo","modificacion");
         modelo.put("estado", true);
         modelo.addAttribute("noticias", noticias);
         
         sN.modificarNoticia(id, titulo, cuerpo,alta);
         
-        return "redirect:/";
+//        return "redirect:/";
+        return "index.html";
     }
 }

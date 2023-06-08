@@ -5,6 +5,7 @@
 package com.egg.news.Servicios;
 
 import com.egg.news.Entidades.Noticia;
+import com.egg.news.Excepciones.NoticiasExcepsion;
 import com.egg.news.Repositorios.repositorioNoticia;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,14 @@ public class serviciosNoticia  {
     private repositorioNoticia rN;
     
     @Transactional
-    public void crearNoticia(String Titulo, String Cuerpo){
+    public void crearNoticia(String Titulo, String Cuerpo) throws NoticiasExcepsion{
+        
+        validar(Titulo, Cuerpo);
+        
         Noticia noticia = new Noticia();
         noticia.setTitulo(Titulo);
         noticia.setCuerpo(Cuerpo);
+        
         rN.save(noticia);
     }
     @Transactional(readOnly = true)
@@ -76,6 +81,15 @@ public class serviciosNoticia  {
             rN.save(noticiaAux);
         }
        
+    }
+    
+    public void validar(String Titulo, String Cuerpo) throws NoticiasExcepsion{
+        if(Titulo.isEmpty() || Titulo == null){
+            throw new NoticiasExcepsion("Titulo no puede ser nulo o vacio");
+        }
+        if(Cuerpo.isEmpty() || Cuerpo == null){
+            throw new NoticiasExcepsion("Contenido no puede ser nulo o vacio");
+        }
     }
     
 }
